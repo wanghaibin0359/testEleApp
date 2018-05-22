@@ -11,11 +11,20 @@ const ajax = axios.create({
 	'timeout': 3000
 })
 ajax.interceptors.request.use((config) => {
-	console.log(config)
 	return config
 })
 ajax.interceptors.response.use((config) => {
-	console.log(config)
-	return config
+  const data = config.data;
+  console.log(1);
+  if (data.code !== '200') {
+    const err = new Error(data.description);
+    err.data = data;
+    err.response = config;
+  } else {
+    // return config
+  }
+}, (rej) => {
+  console.log(2);
+  return rej
 })
 export default ajax;

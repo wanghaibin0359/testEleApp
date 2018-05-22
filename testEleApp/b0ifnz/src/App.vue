@@ -29,7 +29,12 @@ import axios from 'src/action/util';
     },
     created () {
       axios.get('/goods').then((res) => {
+        this.$store.goods = res;
+        console.log('成功的');
         console.log(res)
+      }).catch((rej) => {
+        console.log('befeated');
+        console.log(rej)
       })
     },
     mounted () {
@@ -38,7 +43,7 @@ import axios from 'src/action/util';
   }
 </script>
 <style lang="less" scoped>
- @import './minxi/index.less'; 
+ @import './minxi/index.less';
   @click:rgb(77,85,93);
   @no-click:rgb(240,20,20);
   #app{
@@ -46,7 +51,7 @@ import axios from 'src/action/util';
       display:flex;
       width:100%;
       flex-wrap:wrap;
-      
+
       .border-1px(1px,solid,rgba(7,17,27,0.1));
      .tab-item{
         flex:1 0 auto;
@@ -65,7 +70,7 @@ import axios from 'src/action/util';
           }
        }
      }
-      
+
     }
   }
 </style>

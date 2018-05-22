@@ -8,14 +8,12 @@ Vue.use(VueRouter);
 Vue.use(Vuex);
 let router = new VueRouter(routers);
 let store = new Vuex.Store(stores);
-console.log(routers)
 let Apps = new Vue({
 		el: '#app',
 		router,
 		store,
 		render: h => h(App)
 	});
-
 export default Apps;
 
 /* let app = Vue.extend(App);

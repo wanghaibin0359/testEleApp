@@ -6,7 +6,7 @@
 */
 
 export default {
-	goods: {
-		conot: 1
-	}
+  'goods': {},
+  'seller': {},
+  'ratings': {}
 }
