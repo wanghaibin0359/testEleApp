@@ -7,6 +7,9 @@ import App from './App.vue';
 import routers from 'src/router/index.js';
 import stores from 'src/store/index';
 import util from 'src/action/util.js';
+import 'src/minxi/index.less';
+import '../static/css/reset.css';
+
 Vue.use(VueRouter);
 Vue.use(Vuex);
 Vue.use(ElementUI);

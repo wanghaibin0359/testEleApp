@@ -1,0 +1,11 @@
+.bgcimg (@app) {
+  background-image: url('@{app}2x.png');
+   @media screen and (-webkit-min-device-pixel-ratio:2),
+    only screen and (min-device-pixel-ratio:2){
+      background-image: url('@{app}2x.png');
+    }
+  @media screen and (-webkit-min-device-pixel-ratio:3),
+  only screen and (min-device-pixel-ratio:3){
+    background-image: url('@{app}3x.png');
+  }
+}

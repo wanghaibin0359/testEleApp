@@ -56,7 +56,7 @@ import allAction from 'src/common/allAction/allAction';
       }) */
     },
     mounted () {
-     // console.log(window.devicePixelRatio)
+      console.log(window.devicePixelRatio)
       this.$router.push('/goods');
     },
     watch: {
@@ -84,7 +84,7 @@ import allAction from 'src/common/allAction/allAction';
   }
 </script>
 <style lang="less" scoped>
- @import './minxi/index.less';
+ @import './minxi/minix.less';
   @click:rgb(77,85,93);
   @no-click:rgb(240,20,20);
   #app{
@@ -92,7 +92,6 @@ import allAction from 'src/common/allAction/allAction';
       display:flex;
       width:100%;
       flex-wrap:wrap;
-
       .border-1px(1px,solid,rgba(7,17,27,0.1));
      .tab-item{
         flex:1 0 auto;

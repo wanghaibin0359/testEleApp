@@ -1,0 +1,17 @@
+.border-1px(...){
+  &::after{
+    content: "";
+    width:100%;
+
+    border-bottom:@arguments;
+    @media screen and (-webkit-min-device-pixel-ratio:1.5),
+    only screen and (min-device-pixel-ratio:2){
+      transition: scaleY(0.7);
+    }
+    @media screen and (-webkit-min-device-pixel-ratio:2),
+    only screen and (min-device-pixel-ratio:2){
+      transition: scaleY(0.5);
+    }
+  }
+}
+

@@ -1,16 +1,2 @@
-.border-1px(...){
-	&::after{
-		content: "";
-		width:100%;
-
-		border-bottom:@arguments;
-		@media screen and (-webkit-min-device-pixel-ratio:2),
-		only screen and (min-device-pixel-ratio:2){
-			transition:scale(0.5);
-		}
-		@media screen and (-webkit-min-device-pixel-ratio:3),
-		only screen and (min-device-pixel-ratio:3){
-			transition:scale(0.3);
-		}
-	}
-}
+@import "./minix.less";
+@import "./bgcimg.less";
