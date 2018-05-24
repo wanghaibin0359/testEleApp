@@ -8,5 +8,6 @@
 export default {
   'goods': {},
   'seller': {},
-  'ratings': {}
+  'ratings': {},
+  'classMap': ['decrease', 'discount', 'special', 'invoice', 'guarantee']
 }

@@ -2,15 +2,12 @@
 	<div class="header">
 		<div class="header-base">
 			<div class="content-left inline-block">
-				<div calss="content-img">
-					<img :src="getsellers.avatar" alt="" width="64" height="64">
-				</div>
+        <img  :src="getsellers.avatar" alt="" width="64" height="64">
 			</div>
 			<div class="content-auto inline-block">
 				<div class="title">
 					<span class="sign">
-
-          			</span>
+          </span>
 					<span class="sellername">{{getsellers.name}}</span>
 				</div>
 				<div class="arrivalTime">
@@ -18,30 +15,35 @@
 				</div>
 				<div class="spacilOffer">
 					<span v-show='description' class="sign inline-block">
-						
 					</span>
 					<span class="info inline-block">{{description?description[0].description:''}}</span>
 				</div>
 			</div>
 			<div class="clickbtn">
 				<span>5个</span>
-				<span>></span>
+				<span @click="clickPopShow" class="icon-keyboard_arrow_right"></span>
 			</div>
 		</div>
-		<div class="bulletin">
+		<div class="bulletin" @click="clickPopShow">
 			<div class="bulletin_wrapper">
 				<span class="bulletin_img"></span>
 				<span class="bulletin_content">{{getsellers.bulletin}}</span>
-				<span class="bulletin_arrow">></span>
+				<span class="bulletin_arrow icon-keyboard_arrow_right"></span>
 			</div>
 		</div>
 		<div class="bgcImg">
 			<img  :src="getsellers.avatar" alt="" >
 		</div>
+    <transition name="fade">
+      <div class="popPage" v-show="popUp" transition="popPage">
+        <div class="closebtn icon-close"  @click="clickClosePage"></div>
+      </div>
+    </transition>
 	</div>
+
 </template>
 <script>
-import lable from '../label/lable.vue'
+import lable from '../label/lable.vue';
 	export default {
 		components: {lable},
 		props: {
@@ -54,33 +56,69 @@ import lable from '../label/lable.vue'
 		},
 		data () {
 			return {
-				descriptions: ''
+				descriptions: '',
+        popUp: false
 			}
 		},
 		computed: {
 			description () {
 				return this.getsellers.supports
 			}
-		}
+		},
+    methods: {
+      clickPopShow () {
+        this.popUp = true;
+      },
+      clickClosePage () {
+        this.popUp = false;
+      }
+    }
 	};
 </script>
 <style lang="less" rel="stylesheet/less">
 @import '../../minxi/bgcimg.less';
+@import '../../common/fonts/style.css';
   .header{
   	position: relative;
     width:100%;
     background-color: rgba(7,17,27,.5);
-
-	.bgcImg{
+    overflow: hidden;
+    .popPage{
+      &.fade-enter-active{
+        transition: all .5s;
+      }
+      &.fade-enter,&.fade-leave-active{
+        opacity: 0;
+        transition: all .5s;
+      }
+      position:fixed;
+      top:0;
+      left:0;
+      z-index: 100;
+      width:100%;
+      height: 100%;
+      background-color:rgba(7,17,27,.8);
+      .closebtn{
+        position:absolute;
+        left:50%;
+        bottom:32px;
+        transform: translateX(-50%);
+        font-size: 32px;
+        width:32px;
+        height: 32px;
+        color:rgba(255,255,255,.5);
+      }
+    }
+	  .bgcImg{
 		position: absolute;
 		z-index: -1;
 		width:100%;
 		height: 100%;
 		top:0;
 		left: 0;
-		filter: blur(10px); 
+		filter: blur(10px);
 		img{
-			width:100%;	
+			width:100%;
 			height: 100%;
 		}
 	}
@@ -140,24 +178,28 @@ import lable from '../label/lable.vue'
           color:rgb(255,255,255);
           font-weight: 200;
           line-height: 12px;
-			
+
           .sign{
           	 margin-right:4px;
-			.bgcimg('../components/header/decrease_1@');
+			      .bgcimg('../components/header/decrease_1@');
 			 background-size:12px 12px;
           	width:12px;
           	height:12px;
           }
           .info{
           	 font-size:12px;
-          } 
+          }
         }
       }
       .inline-block{
         margin-right:18px;
         vertical-align: top;
         display:inline-block;
-
+      }
+      .content-left{
+          img{
+            border-radius: 2px;
+          }
       }
 
     }
