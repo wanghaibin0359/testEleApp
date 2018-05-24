@@ -33,13 +33,14 @@ import allAction from 'src/common/allAction/allAction';
     },
     created () {
       let self = this;
-      allAction(this, this.goods, this.sellers, this.ratings).then((res) => {
+      allAction(this.goods(), this.sellers(), this.ratings())
+       .then((res) => {
         self.getgoods = self.$store.state.goods = res[0].data;
         self.getsellers = self.$store.state.seller = res[1].data;
         self.getratings = self.$store.state.ratings = res[2].data;
       }).catch((rej) => {
         this.$openBox('商品请求报错！');
-      })
+      });
       /* this.$ajax.all([this.goods(), this.sellers(), this.ratings()])
       .then(this.$ajax.spread(function (acct, perms) {
           console.log(acct)

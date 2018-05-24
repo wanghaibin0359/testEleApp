@@ -10,23 +10,40 @@
 				<div class="title">
 					<span class="sign">
 
-          </span>
+          			</span>
 					<span class="sellername">{{getsellers.name}}</span>
 				</div>
 				<div class="arrivalTime">
 					{{getsellers.description}}/{{getsellers.deliveryTime}}分到达
 				</div>
 				<div class="spacilOffer">
-					<span class="sign"></span>
-					<span class="info">{{description?description[0].description:''}}</span>
+					<span v-show='description' class="sign inline-block">
+						
+					</span>
+					<span class="info inline-block">{{description?description[0].description:''}}</span>
 				</div>
 			</div>
+			<div class="clickbtn">
+				<span>5个</span>
+				<span>></span>
+			</div>
 		</div>
-
+		<div class="bulletin">
+			<div class="bulletin_wrapper">
+				<span class="bulletin_img"></span>
+				<span class="bulletin_content">{{getsellers.bulletin}}</span>
+				<span class="bulletin_arrow">></span>
+			</div>
+		</div>
+		<div class="bgcImg">
+			<img  :src="getsellers.avatar" alt="" >
+		</div>
 	</div>
 </template>
 <script>
+import lable from '../label/lable.vue'
 	export default {
+		components: {lable},
 		props: {
 			getsellers: {
 				type: Object,
@@ -50,10 +67,45 @@
 <style lang="less" rel="stylesheet/less">
 @import '../../minxi/bgcimg.less';
   .header{
+  	position: relative;
     width:100%;
-    background-color: pink;
+    background-color: rgba(7,17,27,.5);
+
+	.bgcImg{
+		position: absolute;
+		z-index: -1;
+		width:100%;
+		height: 100%;
+		top:0;
+		left: 0;
+		filter: blur(10px); 
+		img{
+			width:100%;	
+			height: 100%;
+		}
+	}
     .header-base{
       padding:24px 0 18px 24px;
+      position: relative;
+      .clickbtn{
+      		font-size: 0;
+      		position: absolute;
+      		bottom:16px;
+      		right: 12px;
+      		padding:7px 8px;
+      		background-color: rgba(0,0,0,.2);
+      		border-radius:18px;
+			span{
+				line-height:12px;
+				font-size:10px;
+				color:white;
+				font-weight: 200;
+				display: inline-block;
+				&:first-child{
+					margin-right: 2px;
+				}
+			}
+      	}
       .content-auto{
         .title{
           margin:2px 0 8px 0;
@@ -84,10 +136,21 @@
           margin-bottom:10px;
         }
         .spacilOffer{
-          font-size:12px;
+          font-size:0px;
           color:rgb(255,255,255);
           font-weight: 200;
           line-height: 12px;
+			
+          .sign{
+          	 margin-right:4px;
+			.bgcimg('../components/header/decrease_1@');
+			 background-size:12px 12px;
+          	width:12px;
+          	height:12px;
+          }
+          .info{
+          	 font-size:12px;
+          } 
         }
       }
       .inline-block{
@@ -96,6 +159,47 @@
         display:inline-block;
 
       }
+
+    }
+    .bulletin{
+    	width:100%;
+    	height: 28px;
+    	padding: 8px 12px;
+    	background-color:rgba(7,17,27,.2);
+    	box-sizing: border-box;
+    	.bulletin_wrapper{
+    		font-size: 0;
+    		max-width:100%;
+    		display: flex;
+    		span{
+    			display: inline-block;
+    			vertical-align: top;
+    			margin-right:4px;
+    			&:last-child{
+    				margin:0;
+    			}
+    		}
+    		.bulletin_img{
+    			flex: 0 0 22px;
+    			.bgcimg('../components/header/bulletin@');
+    			background-size: 22px 11px;
+    		}
+    		.bulletin_content{
+    			flex: 1 1 auto;
+    			text-overflow: ellipsis;
+    			overflow: hidden;
+    			white-space: nowrap;
+    			font-size: 10px;
+    			color:rgb(255,255,255);
+    			font-weight: 200;
+    		}
+    		.bulletin_arrow{
+    			flex: 0 0 auto;
+    			font-size: 10px;
+    			color:white;
+
+    		}
+    	}
 
     }
   }
