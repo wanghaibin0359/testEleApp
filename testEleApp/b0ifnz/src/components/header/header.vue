@@ -7,7 +7,7 @@
 			<div class="content-auto inline-block">
 				<div class="title">
 					<span class="sign">
-          </span>
+          			</span>
 					<span class="sellername">{{getsellers.name}}</span>
 				</div>
 				<div class="arrivalTime">
@@ -15,6 +15,7 @@
 				</div>
 				<div class="spacilOffer">
 					<span v-show='description' class="sign inline-block">
+						<lable 	:datas="description?description[0].type:0" :size='1'></lable>
 					</span>
 					<span class="info inline-block">{{description?description[0].description:''}}</span>
 				</div>
@@ -36,16 +37,27 @@
 		</div>
     <transition name="fade">
       <div class="popPage" v-show="popUp" transition="popPage">
+      	<div class="title">
+      		<span class="sellername">{{getsellers.name}}</span>
+      		<div class="star" v-show="getsellers">
+	      		<ul class="starul">
+	      			<li class="starli" v-for='item in starArray' ><star :starclass="item"></star></li>
+				</ul>
+			</div>
+      	</div>
         <div class="closebtn icon-close"  @click="clickClosePage"></div>
       </div>
     </transition>
 	</div>
-
 </template>
 <script>
 import lable from '../label/lable.vue';
+import star from '../star/star.vue';
+import {getStarArray} from 'src/common/util/computedStar';
+	const STARSIZE = 3;
+	const STARCOUNT = 5;
 	export default {
-		components: {lable},
+		components: {lable, star},
 		props: {
 			getsellers: {
 				type: Object,
@@ -57,22 +69,26 @@ import lable from '../label/lable.vue';
 		data () {
 			return {
 				descriptions: '',
-        popUp: false
+				popUp: false
 			}
 		},
 		computed: {
 			description () {
 				return this.getsellers.supports
+			},
+			starArray () {
+				let ss = getStarArray(STARCOUNT, STARSIZE, this.getsellers.score);
+				return ss
 			}
 		},
-    methods: {
-      clickPopShow () {
-        this.popUp = true;
-      },
-      clickClosePage () {
-        this.popUp = false;
-      }
-    }
+		methods: {
+		clickPopShow () {
+			this.popUp = true;
+		},
+		clickClosePage () {
+			this.popUp = false;
+		}
+		}
 	};
 </script>
 <style lang="less" rel="stylesheet/less">
@@ -98,6 +114,31 @@ import lable from '../label/lable.vue';
       width:100%;
       height: 100%;
       background-color:rgba(7,17,27,.8);
+      .title{
+      	 margin:64px 0 28px 0;
+      	text-align: center;
+			.sellername{
+				display: inline-block;
+				 font-size:18px;
+				font-weight: 700;
+				color:rgb(255,255,255);
+				line-height: 18px;
+				margin-bottom: 18px; 
+			}
+			.star{
+				text-align: center;
+				.starul{
+					display: inline-block;
+					overflow: hidden;
+					.starli{
+						float:left;
+						width:20px;
+						height: 19px;
+						margin-right: 20px;
+					}
+				}
+			}
+		}
       .closebtn{
         position:absolute;
         left:50%;
@@ -147,7 +188,7 @@ import lable from '../label/lable.vue';
       .content-auto{
         .title{
           margin:2px 0 8px 0;
-          .sign{
+          /* .sign{
            .bgcimg('../components/header/brand@');
             background-size:30px 18px;
             vertical-align: top;
@@ -155,8 +196,8 @@ import lable from '../label/lable.vue';
             display: inline-block;
             width:30px;
             height:18px;
-
-          }
+          
+          } */
           .sellername{
             display: inline-block;
             vertical-align: top;
@@ -181,7 +222,7 @@ import lable from '../label/lable.vue';
 
           .sign{
           	 margin-right:4px;
-			      .bgcimg('../components/header/decrease_1@');
+			 .bgcimg('../components/header/decrease_1@');
 			 background-size:12px 12px;
           	width:12px;
           	height:12px;
@@ -242,7 +283,6 @@ import lable from '../label/lable.vue';
 
     		}
     	}
-
     }
   }
 </style>
